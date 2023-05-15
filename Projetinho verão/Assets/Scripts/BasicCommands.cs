@@ -6,7 +6,7 @@ public class BasicCommands : MonoBehaviour
 {
 
     public int velocidade;                                                          // define a velocidade de movimentação
-    private Rigidbody2D bola;                                             // criar variável para percebeer os componentes de física
+    private Rigidbody2D player;                                             // criar variável para percebeer os componentes de física
     public float forcaPulo;                                              //define a força do pulo
 
 
@@ -17,7 +17,7 @@ public class BasicCommands : MonoBehaviour
     
     void Start()
     {
-        bola = GetComponent<Rigidbody2D>(); 
+        player = GetComponent<Rigidbody2D>(); 
 
     }
 
@@ -25,11 +25,11 @@ public class BasicCommands : MonoBehaviour
     void Update()
     {
         float movimentoX = Input.GetAxisRaw("Horizontal");
-        bola.velocity = new Vector2(movimentoX * velocidade, bola.velocity.y);
+        player.velocity = new Vector2(movimentoX * velocidade, player.velocity.y);
 
         if (Input.GetButtonDown("Jump") && sensor == true)
         {
-            bola.AddForce(new Vector2(0, forcaPulo));
+            player.AddForce(new Vector2(0, forcaPulo));
         }
     }
 
