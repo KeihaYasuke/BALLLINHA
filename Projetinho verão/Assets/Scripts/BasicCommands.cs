@@ -13,11 +13,15 @@ public class BasicCommands : MonoBehaviour
     public bool sensor;                                                 // sensor para verificar se está colidindo com o chão
     public Transform posicaoSensor;                                     //posição onde o sensor será posicionado
     public LayerMask layerChao;                                         // camada de interação 
-    
-    
+
+    private Animator anim;
+    private Animator anim2;
+    private SpriteRenderer sprite;
     void Start()
     {
-        player = GetComponent<Rigidbody2D>(); 
+        player = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
 
     }
 
@@ -26,11 +30,37 @@ public class BasicCommands : MonoBehaviour
     {
         float movimentoX = Input.GetAxisRaw("Horizontal");
         player.velocity = new Vector2(movimentoX * velocidade, player.velocity.y);
+        
 
-        if (Input.GetButtonDown("Jump") && sensor == true)
+        if (Input.GetButtonDown("Jump") && sensor == true) //movimento de pulo atravez do sensor
         {
             player.AddForce(new Vector2(0, forcaPulo));
         }
+
+        anim.SetBool("jump", sensor);
+
+       
+
+
+
+        anim.SetInteger("run", (int)movimentoX); //animação de correr
+
+        if (movimentoX > 0)
+        {
+            sprite.flipX = false;
+        }
+        else if (movimentoX < 0)
+        {
+            sprite.flipX = true;
+        }
+
+
+        if (Input.GetButtonDown("Fire1")) //animação de bater
+        {
+            anim.SetTrigger("chute");
+        }
+        
+
     }
 
     private void FixedUpdate()
