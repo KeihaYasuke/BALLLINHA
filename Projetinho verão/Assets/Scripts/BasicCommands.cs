@@ -57,7 +57,7 @@ public class BasicCommands : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1")) //animação de bater
         {
-            anim.SetTrigger("chute");
+            anim.SetTrigger("attack");
         }
         
 
